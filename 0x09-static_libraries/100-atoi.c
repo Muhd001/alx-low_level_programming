@@ -1,41 +1,24 @@
-#include "main.h"
-#include <stdio.h>
 /**
- * _atoi - gets sign and numbers of string
- * @s: array
- * Return: gets numbers with its sign
- */
+ * _atoi - converts a string to an integer
+ *
+ * @s: string input parameter
+ *
+ * Return: converted integer from string
+*/
+
 int _atoi(char *s)
 {
-	unsigned int count = 0, x, y, z, num = 0, temp;
-	int w = 1;
+	unsigned int n = 0;
+	int sign = 1;
 
-	while (*(s + count) != '\0')
-	{
-		count++;
-	}
-	for (x = 0; x < count; x++)
-	{
-		if (*(s + x) >= '0' && *(s + x) <= '9')
+	do {
+		if (*s == '-')
+			sign *= -1;
+		else if (*s >= '0' && *s <= '9')
+			n = (n * 10) + (*s - '0');
+		else if (n > 0)
 			break;
-	}
-	for (y = x; y < count; y++)
-	{
-		if (!(*(s + y) >= '0' && *(s + y) <= '9'))
-			break;
-	}
-	for (z = 0; z < x; z++)
-	{
-		if (*(s + z) == '-')
-			w = w * (-1);
-	}
-	temp = y - x;
-	while (temp >= 1)
-	{
-		num = (num * 10) + (*(s + x) - '0');
-		x++;
-		temp--;
-	}
-	num = num * w;
-	return (num);
+	} while (*s++);
+
+	return (n * sign);
 }
